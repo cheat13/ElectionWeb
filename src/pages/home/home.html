@@ -1,14 +1,63 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>
-      Ionic Blank
+      Election 2019
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-label>ข้อมูล</ion-label>
+          <ion-select [(ngModel)]="chart" interface="popover" (ionChange)="switchChart()">
+            <ion-option value="1">คะแนนผู้มาใช้สิทธิ (%)</ion-option>
+            <ion-option value="2">คะแนนพรรค (%)</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-label>ตัวกรอง</ion-label>
+          <ion-select [(ngModel)]="party" interface="popover" (ionChange)="loadDataChart()" *ngIf="chart == '1'">
+            <ion-option value="ทั้งหมด">ทั้งหมด (350 เขต)</ion-option>
+            <ion-option value="พลังประชารัฐ">พลังประชารัฐ ชนะ</ion-option>
+            <ion-option value="เพื่อไทย">เพื่อไทย ชนะ</ion-option>
+            <ion-option value="อนาคตใหม่">อนาคตใหม่ ชนะ</ion-option>
+            <ion-option value="ประชาธิปัตย์">ประชาธิปัตย์ ชนะ</ion-option>
+            <ion-option value="ภูมิใจไทย">ภูมิใจไทย ชนะ</ion-option>
+            <ion-option value="เสรีรวมไทย">เสรีรวมไทย ชนะ</ion-option>
+            <ion-option value="ชาติไทยพัฒนา">ชาติไทยพัฒนา ชนะ</ion-option>
+            <ion-option value="เศรษฐกิจใหม่">เศรษฐกิจใหม่ ชนะ</ion-option>
+            <ion-option value="เพื่อชาติ">เพื่อชาติ ชนะ</ion-option>
+          </ion-select>
+          <ion-select [(ngModel)]="party" interface="popover" (ionChange)="loadDataPartyChart()" *ngIf="chart == '2'">
+            <ion-option value="พลังประชารัฐ">พลังประชารัฐ</ion-option>
+            <ion-option value="เพื่อไทย">เพื่อไทย</ion-option>
+            <ion-option value="อนาคตใหม่">อนาคตใหม่</ion-option>
+            <ion-option value="ประชาธิปัตย์">ประชาธิปัตย์</ion-option>
+            <ion-option value="ภูมิใจไทย">ภูมิใจไทย</ion-option>
+            <ion-option value="เสรีรวมไทย">เสรีรวมไทย</ion-option>
+            <ion-option value="ชาติไทยพัฒนา">ชาติไทยพัฒนา</ion-option>
+            <ion-option value="เศรษฐกิจใหม่">เศรษฐกิจใหม่</ion-option>
+            <ion-option value="เพื่อชาติ">เพื่อชาติ</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+    <ion-col></ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col></ion-col>
+    <chart [type]="typeChart" [data]="dataChart" [options]="optionsChart" style="width: 1500px; height: 500px"></chart>
+    <ion-col></ion-col>
+  </ion-row>
+
 </ion-content>
