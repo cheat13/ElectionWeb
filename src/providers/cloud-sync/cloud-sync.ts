@@ -22,14 +22,14 @@ export class CloudSyncProvider {
     return this.http.get<ScoreAreaV2[]>(this.baseUrl + 'GetScoreAreaV2/');
   }
 
-  public loadDataChart(party: string): Observable<any> {
-    return this.http.get<DataChart>(this.baseUrl + 'GetDataChart/' + party);
+  public loadDataChart(party: string, chart: string): Observable<any> {
+    return this.http.get<DataChart>(this.baseUrl + 'GetDataChart/' + party + "/" + chart);
   }
 
   public loadDataPartyChart(party: string): Observable<any> {
     return this.http.get<DataChart>(this.baseUrl + 'GetDataPartyChart/' + party);
   }
 
-  
+
 
 }
