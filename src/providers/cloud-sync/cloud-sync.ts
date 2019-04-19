@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class CloudSyncProvider {
 
-  private readonly baseUrl: string = "http://localhost:5000/api/ElectionCalc/";
+  private readonly baseUrl: string = "https://electionwebapi.azurewebsites.net/api/ElectionCalc/";
 
   constructor(public http: HttpClient) {
     console.log('Hello CloudSyncProvider Provider');
