@@ -1,0 +1,28 @@
+<ion-item text-right>
+  <b>เรียงลำดับ</b>
+  <ion-icon name="ios-funnel"></ion-icon>
+</ion-item>
+<ion-list>
+  <button ion-item (click)="select(1)">
+    จากน้อยไปมาก (A - Z)
+  </button>
+  <button ion-item (click)="select(2)">
+    จากมากไปน้อย (Z - A)
+  </button>
+</ion-list>
+
+<div *ngIf="isCompare">
+  <ion-item text-right>
+    <b>ตัวกรอง</b>
+    <ion-icon name="md-search"></ion-icon>
+  </ion-item>
+  <ion-list>
+    <button ion-item (click)="select(3)">
+      น้อยกว่าศูนย์ (< 0) </button> <button ion-item (click)="select(4)">
+        มากกว่าศูนย์ (> 0)
+    </button>
+    <button ion-item (click)="select(5)">
+      ทั้งหมด
+    </button>
+  </ion-list>
+</div>

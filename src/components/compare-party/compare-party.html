@@ -1,0 +1,128 @@
+<ion-row padding-right>
+    <ion-col col-8>
+    </ion-col>
+    <ion-col>
+        <ion-segment [(ngModel)]="type" mode="ios" color="secondary" (ionChange)="setData()">
+            <ion-segment-button value="score">
+                <b>Score</b>
+            </ion-segment-button>
+            <ion-segment-button value="ratio">
+                <b>Ratio (%)</b>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-col>
+</ion-row>
+
+<ion-item padding-top no-lines>
+    <ion-row text-right>
+        <ion-col col-4 text-left>
+            <h2><b>{{ total.party }}</b></h2>
+        </ion-col>
+        <ion-col>
+            <h2><b>{{ total.scoreBatch1st | number:'1.0-2' }}</b></h2>
+        </ion-col>
+        <ion-col>
+            <h2><b>
+                <ion-icon *ngIf="(total.scoreBatch1st < total.scoreBatch2nd)" name="md-arrow-dropup" color="secondary">
+                </ion-icon>
+                <ion-icon *ngIf="(total.scoreBatch1st > total.scoreBatch2nd)" name="md-arrow-dropdown" color="danger">
+                </ion-icon>
+                {{ total.scoreBatch2nd | number:'1.0-2' }}
+            </b></h2>
+        </ion-col>
+        <ion-col [class.upper]="total.diff > 0" [class.lower]="total.diff < 0">
+            <h2><b> {{ total.diff | number:'1.0-2' }}</b></h2>
+        </ion-col>
+        <ion-col [class.upper]="total.percentDiff > 0" [class.lower]="total.percentDiff < 0">
+            <h2><b>{{ total.percentDiff | number:'1.0-2' }}</b></h2>
+        </ion-col>
+    </ion-row>
+</ion-item>
+
+<ion-card padding-right color="gray">
+    <ion-row text-right align-items-center>
+        <ion-col col-4 text-center>
+            <h2><b>พรรค</b></h2>
+        </ion-col>
+        <ion-col>
+            <h2>
+                <ion-select interface="popover" mode="ios" [(ngModel)]="batch1st" (ionChange)="ngOnInit()">
+                    <ion-option value="1">24/ 17:45</ion-option>
+                    <ion-option value="2">24/ 22:33</ion-option>
+                    <ion-option value="3">25/ 07:59</ion-option>
+                    <ion-option value="4">25/ 09:52</ion-option>
+                    <ion-option value="5">25/ 11:11</ion-option>
+                    <ion-option value="7">28 (ไม่นับ 19 เขต)</ion-option>
+                    <ion-option value="6">28</ion-option>
+                    <ion-option value="9">28 (ภาคใต้ ไม่นับ 19 เขต)</ion-option>
+                    <ion-option value="8">28 (ภาคใต้)</ion-option>
+                </ion-select>
+            </h2>
+        </ion-col>
+        <ion-col>
+            <h2>
+                <ion-select interface="popover" mode="ios" [(ngModel)]="batch2nd" (ionChange)="ngOnInit()">
+                    <ion-option value="1">24/ 17:45</ion-option>
+                    <ion-option value="2">24/ 22:33</ion-option>
+                    <ion-option value="3">25/ 07:59</ion-option>
+                    <ion-option value="4">25/ 09:52</ion-option>
+                    <ion-option value="5">25/ 11:11</ion-option>
+                    <ion-option value="7">28 (ไม่นับ 19 เขต)</ion-option>
+                    <ion-option value="6">28</ion-option>
+                    <ion-option value="9">28 (ภาคใต้ ไม่นับ 19 เขต)</ion-option>
+                    <ion-option value="8">28 (ภาคใต้)</ion-option>
+                </ion-select>
+            </h2>
+        </ion-col>
+        <ion-col>
+            <ion-row align-items-center>
+                <ion-col text-right>
+                    <h2>
+                        ผลต่าง
+                    </h2>
+                </ion-col>
+                <button ion-button clear color="light" icon-only (click)="presentPopover('diff')">
+                    <ion-icon name="md-arrow-dropdown"></ion-icon>
+                </button>
+            </ion-row>
+        </ion-col>
+        <ion-col>
+            <ion-row align-items-center>
+                <ion-col text-right>
+                    <h2>
+                        %
+                    </h2>
+                </ion-col>
+                <button ion-button clear color="light" icon-only (click)="presentPopover('percent')">
+                    <ion-icon name="md-arrow-dropdown"></ion-icon>
+                </button>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-card>
+
+<ion-item *ngFor="let party of compareScore; let i = index" padding-right>
+    <ion-row text-right>
+        <ion-col col-4 text-left>
+            <h2>{{ i+1 }}. {{ party.party }}</h2>
+        </ion-col>
+        <ion-col>
+            <h2>{{ party.scoreBatch1st | number:'1.0-2' }}</h2>
+        </ion-col>
+        <ion-col>
+            <h2>
+                <ion-icon *ngIf="(party.scoreBatch1st < party.scoreBatch2nd)" name="md-arrow-dropup" color="secondary">
+                </ion-icon>
+                <ion-icon *ngIf="(party.scoreBatch1st > party.scoreBatch2nd)" name="md-arrow-dropdown" color="danger">
+                </ion-icon>
+                {{ party.scoreBatch2nd | number:'1.0-2' }}
+            </h2>
+        </ion-col>
+        <ion-col [class.upper]="party.diff > 0" [class.lower]="party.diff < 0">
+            <h2> {{ party.diff | number:'1.0-2' }}</h2>
+        </ion-col>
+        <ion-col [class.upper]="party.percentDiff > 0" [class.lower]="party.percentDiff < 0">
+            <h2>{{ party.percentDiff | number:'1.0-2' }}</h2>
+        </ion-col>
+    </ion-row>
+</ion-item>

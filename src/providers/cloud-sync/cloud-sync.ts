@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ScoreAreaV2, DataChart } from '../../app/models';
+import { ScoreAreaV2, DataChart, ScoreElection, ScoreParty, ShowScore, ShowScoreArea, CompareScoreArea } from '../../app/models';
 import { Observable } from 'rxjs/Observable';
 
 /*
@@ -30,6 +30,40 @@ export class CloudSyncProvider {
     return this.http.get<DataChart>(this.baseUrl + 'GetDataPartyChart/' + party);
   }
 
+  public loadScoreElection(): Observable<any> {
+    return this.http.get<ScoreElection[]>(this.baseUrl + 'GetScoreElection/');
+  }
 
+  public loadScoreParty(): Observable<any> {
+    return this.http.get<ScoreParty[]>(this.baseUrl + 'GetScoreParty/');
+  }
+
+  public loadScorePartyRatio(): Observable<any> {
+    return this.http.get<ScoreParty[]>(this.baseUrl + 'GetScorePartyRatio/');
+  }
+
+  public loadShowScoreParty(): Observable<any> {
+    return this.http.get<ShowScore[]>(this.baseUrl + 'GetShowScoreParty/');
+  }
+
+  public loadShowScorePartyRatio(): Observable<any> {
+    return this.http.get<ShowScore[]>(this.baseUrl + 'GetShowScorePartyRatio/');
+  }
+
+  public loadCompareScoreParty(batch1st: string, batch2nd: string): Observable<any> {
+    return this.http.get<ShowScore[]>(this.baseUrl + 'GetCompareScoreParty/' + batch1st + '/' + batch2nd);
+  }
+
+  public loadCompareScorePartyRatio(batch1st: string, batch2nd: string): Observable<any> {
+    return this.http.get<ShowScore[]>(this.baseUrl + 'GetCompareScorePartyRatio/' + batch1st + '/' + batch2nd);
+  }
+
+  public loadShowScoreArea(): Observable<any> {
+    return this.http.get<ShowScoreArea[]>(this.baseUrl + 'GetShowScoreArea/');
+  }
+
+  public loadCompareScoreArea(batch1st: string, batch2nd: string): Observable<any> {
+    return this.http.get<CompareScoreArea[]>(this.baseUrl + 'GetCompareScoreArea/' + batch1st + '/' + batch2nd);
+  }
 
 }
