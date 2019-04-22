@@ -1,0 +1,39 @@
+<ion-row padding>
+  <ion-col>
+    <ion-label padding-left><b>ข้อมูล</b></ion-label>
+    <ion-card color="primary">
+      <h2>
+        <ion-select color="danger" [(ngModel)]="table" mode="ios" interface="popover" text-right>
+          <ion-option value=1>เขตเลือกตั้ง (350 เขต)</ion-option>
+          <ion-option value=2>พรรคการเมือง (77 พรรค)</ion-option>
+        </ion-select>
+      </h2>
+    </ion-card>
+  </ion-col>
+  <ion-col>
+    <ion-label padding-left><b>ตัวกรอง</b></ion-label>
+    <ion-card color="danger">
+      <h2>
+        <ion-select [(ngModel)]="filter" mode="ios" interface="popover" text-right>
+          <ion-option value="1">คะแนนทั้งหมด</ion-option>
+          <ion-option value="2">เปรียบเทียบ</ion-option>
+        </ion-select>
+      </h2>
+    </ion-card>
+  </ion-col>
+</ion-row>
+
+<div [ngSwitch]="table">
+  <div *ngSwitchCase="1">
+    <div [ngSwitch]="filter">
+      <score-area *ngSwitchCase="1"></score-area>
+      <compare-area *ngSwitchCase="2"></compare-area>
+    </div>
+  </div>
+  <div *ngSwitchCase="2">
+    <div [ngSwitch]="filter">
+      <score-party *ngSwitchCase="1"></score-party>
+      <compare-party *ngSwitchCase="2"></compare-party>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../components/components.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -20,6 +21,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
     BrowserModule,
     ChartModule,
     HttpClientModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

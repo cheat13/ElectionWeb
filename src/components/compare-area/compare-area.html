@@ -1,0 +1,117 @@
+<ion-item no-lines>
+    <ion-row text-right>
+        <ion-col col-3 text-left>
+            <h2><b>{{ totalScore.province }}</b></h2>
+        </ion-col>
+        <ion-col>
+            <h2><b>{{ totalScore.scoreBatch1st | number:'1.0-2' }}</b></h2>
+        </ion-col>
+        <ion-col>
+            <h2><b>
+                <ion-icon *ngIf="(totalScore.scoreBatch1st < totalScore.scoreBatch2nd)" name="md-arrow-dropup"
+                    color="secondary">
+                </ion-icon>
+                <ion-icon *ngIf="(totalScore.scoreBatch1st > totalScore.scoreBatch2nd)" name="md-arrow-dropdown"
+                    color="danger">
+                </ion-icon>
+                {{ totalScore.scoreBatch2nd | number:'1.0-2' }}
+            </b></h2>
+        </ion-col>
+        <ion-col [class.upper]="totalScore.diff > 0" [class.lower]="totalScore.diff < 0">
+            <h2><b> {{ totalScore.diff | number:'1.0-2' }}</b></h2>
+        </ion-col>
+        <ion-col [class.upper]="totalScore.percentDiff > 0" [class.lower]="totalScore.percentDiff < 0">
+            <h2><b>{{ totalScore.percentDiff | number:'1.0-2' }}</b></h2>
+        </ion-col>
+    </ion-row>
+</ion-item>
+
+<ion-card padding-right color="gray">
+    <ion-row text-right align-items-center>
+        <ion-col col-3 text-center>
+            <h2><b>เขต</b></h2>
+        </ion-col>
+        <ion-col>
+            <h2>
+                <ion-select interface="popover" mode="ios" [(ngModel)]="batch1st" (ionChange)="ngOnInit()">
+                    <ion-option value="1">24/ 17:45</ion-option>
+                    <ion-option value="2">24/ 22:33</ion-option>
+                    <ion-option value="3">25/ 07:59</ion-option>
+                    <ion-option value="4">25/ 09:52</ion-option>
+                    <ion-option value="5">25/ 11:11</ion-option>
+                    <ion-option value="7">28 (ไม่นับ 19 เขต)</ion-option>
+                    <ion-option value="6">28</ion-option>
+                    <ion-option value="9">28 (ภาคใต้ ไม่นับ 19 เขต)</ion-option>
+                    <ion-option value="8">28 (ภาคใต้)</ion-option>
+                </ion-select>
+            </h2>
+        </ion-col>
+        <ion-col>
+            <h2>
+                <ion-select interface="popover" mode="ios" [(ngModel)]="batch2nd" (ionChange)="ngOnInit()">
+                    <ion-option value="1">24/ 17:45</ion-option>
+                    <ion-option value="2">24/ 22:33</ion-option>
+                    <ion-option value="3">25/ 07:59</ion-option>
+                    <ion-option value="4">25/ 09:52</ion-option>
+                    <ion-option value="5">25/ 11:11</ion-option>
+                    <ion-option value="7">28 (ไม่นับ 19 เขต)</ion-option>
+                    <ion-option value="6">28</ion-option>
+                    <ion-option value="9">28 (ภาคใต้ ไม่นับ 19 เขต)</ion-option>
+                    <ion-option value="8">28 (ภาคใต้)</ion-option>
+                </ion-select>
+            </h2>
+        </ion-col>
+        <ion-col>
+            <ion-row align-items-center>
+                <ion-col text-right>
+                    <h2>
+                        ผลต่าง
+                    </h2>
+                </ion-col>
+                <button ion-button clear color="light" icon-only (click)="presentPopover('diff')">
+                    <ion-icon name="md-arrow-dropdown"></ion-icon>
+                </button>
+            </ion-row>
+        </ion-col>
+        <ion-col>
+            <ion-row align-items-center>
+                <ion-col text-right>
+                    <h2>
+                        %
+                    </h2>
+                </ion-col>
+                <button ion-button clear color="light" icon-only (click)="presentPopover('percent')">
+                    <ion-icon name="md-arrow-dropdown"></ion-icon>
+                </button>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-card>
+
+<ion-item *ngFor="let compare of listShowCompareScore; let i = index" padding-right>
+    <ion-row text-right>
+        <ion-col col-3 text-left>
+            <h2>{{ i+1 }}. {{ compare.province }} {{compare.zone}}</h2>
+        </ion-col>
+        <ion-col>
+            <h2>{{ compare.scoreBatch1st | number:'1.0-2' }}</h2>
+        </ion-col>
+        <ion-col>
+            <h2>
+                <ion-icon *ngIf="(compare.scoreBatch1st < compare.scoreBatch2nd)" name="md-arrow-dropup"
+                    color="secondary">
+                </ion-icon>
+                <ion-icon *ngIf="(compare.scoreBatch1st > compare.scoreBatch2nd)" name="md-arrow-dropdown"
+                    color="danger">
+                </ion-icon>
+                {{ compare.scoreBatch2nd | number:'1.0-2' }}
+            </h2>
+        </ion-col>
+        <ion-col [class.upper]="compare.diff > 0" [class.lower]="compare.diff < 0">
+            <h2> {{ compare.diff | number:'1.0-2' }}</h2>
+        </ion-col>
+        <ion-col [class.upper]="compare.percentDiff > 0" [class.lower]="compare.percentDiff < 0">
+            <h2>{{ compare.percentDiff | number:'1.0-2' }}</h2>
+        </ion-col>
+    </ion-row>
+</ion-item>
