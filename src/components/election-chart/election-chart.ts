@@ -75,8 +75,17 @@ export class ElectionChartComponent {
 
   setOptionsChart() {
     this.optionsChart = {
+      animation: {
+        duration: 1000,
+      },
+      elements: {
+        point: {
+          hitRadius: 10,
+          hoverRadius: 6
+        }
+      },
       responsive: true,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       legend: {
         labels: {
           fontColor: 'black',
@@ -108,6 +117,9 @@ export class ElectionChartComponent {
           ticks: {
             suggestedMax: (this.chart == "4") ? 250000 : 100,
             suggestedMin: 0,
+            callback: function (value) {
+              return (Math.abs(value) < 1000) ? value : (value / 1000) + 'k';
+            }
           }
         }],
         xAxes: [{
