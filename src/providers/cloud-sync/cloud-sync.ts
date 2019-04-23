@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ScoreAreaV2, DataChart, ScoreElection, ScoreParty, ShowScore, ShowScoreArea, CompareScoreArea } from '../../app/models';
+import { DataChart, ScoreElection, ScoreParty, ShowScore, ShowScoreArea, CompareScoreArea } from '../../app/models';
 import { Observable } from 'rxjs/Observable';
 
 /*
@@ -12,14 +12,11 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class CloudSyncProvider {
 
-  private readonly baseUrl: string = "https://electionwebapi.azurewebsites.net/api/ElectionCalc/";
+  // private readonly baseUrl: string = "https://electionwebapi.azurewebsites.net/api/ElectionCalc/";
+  private readonly baseUrl: string = "http://localhost:5000/api/ElectionCalc/";
 
   constructor(public http: HttpClient) {
     console.log('Hello CloudSyncProvider Provider');
-  }
-
-  public loadScoreArea(): Observable<any> {
-    return this.http.get<ScoreAreaV2[]>(this.baseUrl + 'GetScoreAreaV2/');
   }
 
   public loadDataChart(party: string, chart: string): Observable<any> {

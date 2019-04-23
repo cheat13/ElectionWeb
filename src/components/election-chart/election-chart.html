@@ -9,6 +9,9 @@
           <ion-option value="4">จำนวนผู้มาใช้สิทธิเลือกตั้ง</ion-option>
           <ion-option value="1">สัดส่วนผู้มาใช้สิทธิ (%)</ion-option>
           <ion-option value="2">สัดส่วนคะแนนพรรค (%)</ion-option>
+          <ion-option value="5">ผลต่างคะแนน 24:25</ion-option>
+          <ion-option value="6">ผลต่างคะแนน 25:28</ion-option>
+          <ion-option value="7">ผลต่างคะแนน 24:28</ion-option>
         </ion-select>
       </h2>
     </ion-card>
@@ -44,6 +47,21 @@
         </ion-select>
       </h2>
     </ion-card>
+  </ion-col>
+</ion-row>
+
+<ion-row padding-right>
+  <ion-col col-8>
+  </ion-col>
+  <ion-col>
+    <ion-segment [(ngModel)]="type" mode="ios" color="secondary" (ionChange)="switchChart()" *ngIf="chart > 4">
+      <ion-segment-button value="0">
+        <b>Score</b>
+      </ion-segment-button>
+      <ion-segment-button value="3">
+        <b>Ratio (%)</b>
+      </ion-segment-button>
+    </ion-segment>
   </ion-col>
 </ion-row>
 
