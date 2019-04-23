@@ -3,7 +3,7 @@
     <ion-label padding-left><b>ข้อมูล</b></ion-label>
     <ion-card color="primary">
       <h2>
-        <ion-select color="danger" [(ngModel)]="table" mode="ios" interface="popover" text-right>
+        <ion-select color="danger" [(ngModel)]="table" mode="ios" interface="action-sheet" text-right>
           <ion-option value=1>เขตเลือกตั้ง (350 เขต)</ion-option>
           <ion-option value=2>พรรคการเมือง (77 พรรค)</ion-option>
         </ion-select>
@@ -14,7 +14,7 @@
     <ion-label padding-left><b>ตัวกรอง</b></ion-label>
     <ion-card color="danger">
       <h2>
-        <ion-select [(ngModel)]="filter" mode="ios" interface="popover" text-right>
+        <ion-select [(ngModel)]="filter" mode="ios" interface="action-sheet" text-right>
           <ion-option value="1">คะแนนทั้งหมด</ion-option>
           <ion-option value="2">เปรียบเทียบ</ion-option>
         </ion-select>
