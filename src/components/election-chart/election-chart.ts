@@ -9,6 +9,7 @@ import { CloudSyncProvider } from '../../providers/cloud-sync/cloud-sync';
 export class ElectionChartComponent {
 
   public chart: any;
+  public type: any;
   public title: any;
   public party: any;
   public typeChart: any;
@@ -18,6 +19,7 @@ export class ElectionChartComponent {
   constructor(public navCtrl: NavController, private cloudSync: CloudSyncProvider, public loadingCtrl: LoadingController) {
     console.log('Hello ElectionChartComponent Component');
     this.chart = "3";
+    this.type = "0";
     this.title = "จำนวนผู้มีสิทธิเลือกตั้ง";
     this.typeChart = "scatter";
     this.party = "ทั้งหมด";
@@ -28,11 +30,12 @@ export class ElectionChartComponent {
   }
 
   loadDataChart(type: number) {
+    let chart = (this.chart > 4) ? Number(this.chart) + Number(this.type) : this.chart;
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
     });
     loader.present();
-    let data$ = (type == 1) ? this.cloudSync.loadDataChart(this.party, this.chart) : this.cloudSync.loadDataPartyChart(this.party);
+    let data$ = (type == 1) ? this.cloudSync.loadDataChart(this.party, chart.toString()) : this.cloudSync.loadDataPartyChart(this.party);
     data$.subscribe(data => {
       this.dataChart = data;
       this.setOptionsChart();
@@ -44,23 +47,30 @@ export class ElectionChartComponent {
     switch (this.chart) {
       case "1":
         this.title = "สัดส่วนผู้มาใช้สิทธิ (%)";
-        this.loadDataChart(1);
         break;
       case "2":
         this.title = "สัดส่วนคะแนนพรรค (%)";
-        this.loadDataChart(2)
+        this.party = "พลังประชารัฐ";
         break;
       case "3":
         this.title = "จำนวนผู้มีสิทธิเลือกตั้ง";
-        this.loadDataChart(1);
         break;
       case "4":
         this.title = "จำนวนผู้มาใช้สิทธิเลือกตั้ง";
-        this.loadDataChart(1);
+        break;
+      case "5":
+        this.title = "ผลต่างคะแนน 24:25";
+        break;
+      case "6":
+        this.title = "ผลต่างคะแนน 25:28";
+        break;
+      case "7":
+        this.title = "ผลต่างคะแนน 24:28";
         break;
       default:
         break;
     }
+    (this.chart == "2") ? this.loadDataChart(2) : this.loadDataChart(1);
   }
 
   setOptionsChart() {
@@ -96,11 +106,8 @@ export class ElectionChartComponent {
             fontStyle: 'bold'
           },
           ticks: {
-            max: (this.chart == "1" || this.chart == '2') ? 100 : 250000,
-            beginAtZero: true,
-            callback: function (value) {
-              return (value > 100) ? value : value + '%';
-            }
+            suggestedMax: (this.chart == "4") ? 250000 : 100,
+            suggestedMin: 0,
           }
         }],
         xAxes: [{

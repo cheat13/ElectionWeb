@@ -1,17 +1,5 @@
 import { DateTime } from "ionic-angular";
 
-export class ScoreAreaV2 {
-    id: string;
-    province: string;
-    zone: string;
-    noArea: string;
-    score: number;
-    countAuthority: number;
-    percentScore: number;
-    partyWin: string;
-    region: string;
-}
-
 export class DataChart {
     labels: string[];
     datasets: DataSet[];
