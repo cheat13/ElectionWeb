@@ -85,7 +85,7 @@ export class ElectionChartComponent {
         }
       },
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       legend: {
         labels: {
           fontColor: 'black',
